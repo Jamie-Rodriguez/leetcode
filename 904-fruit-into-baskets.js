@@ -128,4 +128,3 @@ console.assert(totalFruit([1,2,3,2,2]) === 4)
 console.assert(totalFruit([0,1,2]) === 2)
 console.assert(totalFruit([3,3,3,1,2,1,1,2,3,3,4]) === 5)
 console.assert(totalFruit([0,0,1,1]) === 4)
-

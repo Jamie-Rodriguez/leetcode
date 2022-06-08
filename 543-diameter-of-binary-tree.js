@@ -43,7 +43,7 @@
  * @param {TreeNode} root
  * @return {number}
  */
- const  diameterOfBinaryTree = root => {
+ const diameterOfBinaryTree = root => {
     let diameter = 0
 
     const dfs = (node) => {
@@ -62,4 +62,3 @@
     dfs(root)
     return diameter
 }
-

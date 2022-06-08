@@ -34,35 +34,37 @@ const lengthOfLongestSubstring = s => {
     for (let right = 0; right < s.length; right++) {
         const currentChar = s[right]
 
-        // How the two-pointer technique works in this algorithm
-        // -----------------------------------------------------
-        // The goal is that we want to ensure that
-        // there are no duplicate characters between the left and right pointers.
-        // If we have found a previously-seen character,
-        // move left pointer 1 ahead of the character's previously seen position;
-        // thus ensuring that this character is not repeated between the left and right pointers.
-        // Example (ignore spaces):
-        //        a c b d a c k k l
-        //        l       r
-        //     We have seen character 'a' before, at index 0.
-        //     Move left pointer to index 1 (i.e. 1 ahead of previously seen 'a')
-        //        a c b d a c k k l
-        //          l     r
-        //     Next we hit the second 'c':
-        //        a c b d a c k k l
-        //          l       r
-        //     We have seen character 'c' before, at index 1.
-        //     Move left pointer to index 2 (i.e. 1 ahead of previously seen 'c')
-        //        a c b d a c k k l
-        //            l     r
-        //     Fast-forward to when we hit the second 'k':
-        //        a c b d a c k k l
-        //            l         r
-        //     We have seen character 'k' before, at index 6.
-        //     Move left pointer to index 7 (i.e. 1 ahead of previously seen 'k')
-        //     (left pointer and right pointer are at same position here)
-        //        a c b d a c k k l
-        //                      lr
+        /*
+          How the two-pointer technique works in this algorithm
+          -----------------------------------------------------
+          The goal is that we want to ensure that
+          there are no duplicate characters between the left and right pointers.
+          If we have found a previously-seen character,
+          move left pointer 1 ahead of the character's previously seen position;
+          thus ensuring that this character is not repeated between the left and right pointers.
+          Example (ignore spaces):
+                 a c b d a c k k l
+                 l       r
+              We have seen character 'a' before, at index 0.
+              Move left pointer to index 1 (i.e. 1 ahead of previously seen 'a')
+                 a c b d a c k k l
+                   l     r
+              Next we hit the second 'c':
+                 a c b d a c k k l
+                   l       r
+              We have seen character 'c' before, at index 1.
+              Move left pointer to index 2 (i.e. 1 ahead of previously seen 'c')
+                 a c b d a c k k l
+                     l     r
+              Fast-forward to when we hit the second 'k':
+                 a c b d a c k k l
+                     l         r
+              We have seen character 'k' before, at index 6.
+              Move left pointer to index 7 (i.e. 1 ahead of previously seen 'k')
+              (left pointer and right pointer are at same position here)
+                 a c b d a c k k l
+                               lr
+        */
         if ((currentChar in seen) && (left < seen[currentChar])) {
             // Could remove second condition and just put:
             //     left = Math.max(seen[currentChar], left)

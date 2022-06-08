@@ -74,4 +74,3 @@ console.assert(lengthOfLIS([0,1,0,3,2,3]) === 4)
 console.assert(lengthOfLIS([7,7,7,7,7,7,7]) === 1)
 console.assert(lengthOfLIS([4,10,4,3,8,9]) === 3)
 console.assert(lengthOfLIS([1,7,8,4,5,6,-1,9]) === 5)
-

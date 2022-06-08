@@ -50,4 +50,3 @@ console.assert(licenseKeyFormatting('2-5g-3-J', 2) === '2-5G-3J')
 // This is an official test case, despite the description stating:
 // "The string is separated into n + 1 groups by n dashes."
 console.assert(licenseKeyFormatting('--a-a-a-a--', 2) === 'AA-AA')
-

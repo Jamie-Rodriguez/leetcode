@@ -65,4 +65,3 @@ const isValid = s => {
 console.assert(isValid('()') === true)
 console.assert(isValid('()[]{}') === true)
 console.assert(isValid('(]') === false)
-

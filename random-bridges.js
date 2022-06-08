@@ -2,29 +2,31 @@
 const { performance } = require('perf_hooks')
 
 // ------------------------------- Description --------------------------------
-// Imagine a river represented by a grid of size m * n.
-// On the left and right sides are the riverbanks, with the current flowing
-// from top to bottom.
-// You need to cross the river by moving from a square in the leftmost column,
-// to a square on the rightmost column.
-// Unfortunately, the river is flowing too fast to safely swim across!
-// A wizard sees your predicament and offers to help, he says that he can
-// create a series of bridges across the river that will allow you to across.
-// 'Great!' you say as he waves his staff around and chants. *Poof!* a bridge
-// appears on a random square in the middle of the river.
-// The wizard looks confused. He scratches his head, muttering something about
-// the wrong incantation or maybe his staff is broken - he doesn't seem sure.
-// He tries casting the spell again - *poof!* another bridge appears on another
-// random square in the river.
-// The wizard is perplexed. After some more attempts you both come to the
-// conclusion that the wizard's spell can only create a bridge on a random
-// square in the river. But all is not lost! It's not completely useless,
-// right? You can still use the wizard's random bridges to eventually form a
-// path across the river.
-// Given the random-bridge generating function, write an efficient algorithm to
-// identify the earliest timestep that you are able to cross the river.
-// You may only travel horizontally and vertically on the grid i.e. not
-// diagonally.
+/*
+  Imagine a river represented by a grid of size m * n.
+  On the left and right sides are the riverbanks, with the current flowing from
+  top to bottom.
+  You need to cross the river by moving from a square in the leftmost column,
+  to a square on the rightmost column.
+  Unfortunately, the river is flowing too fast to safely swim across!
+  A wizard sees your predicament and offers to help, he says that he can create
+  a series of bridges across the river that will allow you to across.
+  'Great!' you say as he waves his staff around and chants. *Poof!* a bridge
+  appears on a random square in the middle of the river.
+  The wizard looks confused. He scratches his head, muttering something about
+  the wrong incantation or maybe his staff is broken - he doesn't seem sure.
+  He tries casting the spell again - *poof!* another bridge appears on another
+  random square in the river.
+  The wizard is perplexed. After some more attempts you both come to the
+  conclusion that the wizard's spell can only create a bridge on a random
+  square in the river. But all is not lost! It's not completely useless, right?
+  You can still use the wizard's random bridges to eventually form a path
+  across the river.
+  Given the random-bridge generating function, write an efficient algorithm to
+  identify the earliest timestep that you are able to cross the river.
+  You may only travel horizontally and vertically on the grid i.e. not
+  diagonally.
+*/
 
 
 // Any time a coordinate is used, it is of the form: { row, column }, where
@@ -77,8 +79,8 @@ const neighbouringBridges = (river, timestep, { row, column }) => {
 
 // This function is essentially behaving as a hash function to map a coordinate
 // object to a string so that we can store it in a Set.
-// Perhaps converting to a 1D coordinate (int) is a better hash function i.e.
-// coordinateToString({ row, column }, numColumns) -> 1D-coord
+// Perhaps converting to a 1D coordinate (int) is a better hash function, i.e.
+// coordinateToString({ row, column }, numColumns) -> 1D-coord (int)
 const coordinateToString = ({ row, column }) => `${row},${column}`
 
 // O(N)

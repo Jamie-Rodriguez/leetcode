@@ -37,6 +37,7 @@
       0 <= grid[i][j] <=1
 */
 
+
 /*
   Algorithm idea:
   1. Remove all islands that touch the edge of the grid,
@@ -44,7 +45,6 @@
   2. The problem is now identical to problem "200. Number of Islands".
       i.e. Count up the remaining islands.
 */
-
 
 // Because I keep getting these mixed-up...
 const LAND = 0
@@ -149,4 +149,3 @@ console.assert(closedIsland([[0,0,1,1,0,1,0,0,1,0],
                              [1,1,1,1,1,1,0,0,0,0],
                              [1,1,1,0,0,1,0,1,0,1],
                              [1,1,1,0,1,1,0,1,1,0]]) === 5)
-

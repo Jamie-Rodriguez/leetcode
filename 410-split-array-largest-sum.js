@@ -28,6 +28,7 @@
       1 <= m <= min(50, nums.length)
 */
 
+
 // O(nums)
 const numSubArrays = (nums, max) => {
     let currentSum = 0
@@ -44,6 +45,7 @@ const numSubArrays = (nums, max) => {
     // Returning the number of *subarrays*, which is the number of splits + 1
     return splits + 1
 }
+
 
 const splitArray = (nums, m) => {
     let left = Math.max(...nums) // O(nums)
@@ -68,6 +70,8 @@ const splitArray = (nums, m) => {
     return largestSum
 }
 
+
 console.assert(splitArray([7,2,5,10,8], 2) === 18)
 console.assert(splitArray([1,2,3,4,5], 2) === 9)
 console.assert(splitArray([1,4,4], 3) === 4)
+

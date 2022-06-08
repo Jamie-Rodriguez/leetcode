@@ -31,6 +31,7 @@
       grid[i][j] is either 0 or 1.
 */
 
+
 // Warning: Mutates 'grid'!
 const dfs = (grid, r, c, visited=[]) => {
     // Base-case conditions handled here:
@@ -48,6 +49,7 @@ const dfs = (grid, r, c, visited=[]) => {
 
     return 1 + dfs(grid, r-1, c, visited) + dfs(grid, r, c-1, visited) + dfs(grid, r+1, c, visited) + dfs(grid, r, c+1, visited)
 }
+
 
 const maxAreaOfIsland = grid => {
     let maxArea = 0
@@ -80,3 +82,4 @@ console.assert(maxAreaOfIsland([[0,0,1,0,0,0,0,1,0,0,0,0,0],
                                 [0,0,0,0,0,0,0,0,0,0,1,0,0],
                                 [0,0,0,0,0,0,0,1,1,1,0,0,0],
                                 [0,0,0,0,0,0,0,1,1,0,0,0,0]]) === 6)
+

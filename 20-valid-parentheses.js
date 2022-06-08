@@ -25,6 +25,7 @@
       s consists of parentheses only '()[]{}'.
 */
 
+
 const isValid = s => {
     const stack = []
     const closing = {
@@ -60,6 +61,8 @@ const isValid = s => {
     return (stack.length === 0)
 }
 
+
 console.assert(isValid('()') === true)
 console.assert(isValid('()[]{}') === true)
 console.assert(isValid('(]') === false)
+

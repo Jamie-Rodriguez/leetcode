@@ -54,44 +54,46 @@ const lengthOfLongestSubstringKDistinct = (k, items) => {
                                 ? window.get(currentItem)
                                 : 0) + 1)
 
-        // If the new item hasn't been seen before, then the window of
-        // previously-seen items now has k + 1 distinct items...
-        // We loop: incrementing the 'first' pointer and decrementing the
-        // occurrences-counter of the item pointed to by 'first' - effectively
-        // shrinking the window to next time it is in a 'legal' state - i.e.
-        // where the window only contains 'k' distinct items.
-        // Example for k = 2:
-        // [a a a b c b b c a a d]
-        //
-        // i = 0 -> 3
-        // [a a a b c b b c a a d], cache: { a => 3, b => 1 }
-        //  ^     ^
-        //  f     i
-        //
-        // i = 4
-        // [a a a b c b b c a a d], cache: { b => 1, c => 1 }
-        //        ^ ^
-        //        f i
-        //
-        // i = 5 -> 7
-        // [a a a b c b b c a a d], cache: { b => 3, c => 2 }
-        //        ^       ^
-        //        f       i
-        //
-        // i = 8
-        // [a a a b c b b c a a d], cache: { c => 1, a => 1 }
-        //                ^ ^
-        //                f i
-        //
-        // i = 9
-        // [a a a b c b b c a a d], cache: { c => 1, a => 2 }
-        //                ^   ^
-        //                f   i
-        //
-        // i = 10
-        // [a a a b c b b c a a d], cache: { a => 2, d => 1 }
-        //                  ^   ^
-        //                  f   i
+        /*
+          If the new item hasn't been seen before, then the window of
+          previously-seen items now has k + 1 distinct items...
+          We loop: incrementing the 'first' pointer and decrementing the
+          occurrences-counter of the item pointed to by 'first' - effectively
+          shrinking the window to next time it is in a 'legal' state - i.e.
+          where the window only contains 'k' distinct items.
+          Example for k = 2 with the following array:
+          [a a a b c b b c a a d]
+
+          i = 0 -> 3
+          [a a a b c b b c a a d], cache: { a => 3, b => 1 }
+           ^     ^
+           f     i
+
+          i = 4
+          [a a a b c b b c a a d], cache: { b => 1, c => 1 }
+                 ^ ^
+                 f i
+
+          i = 5 -> 7
+          [a a a b c b b c a a d], cache: { b => 3, c => 2 }
+                 ^       ^
+                 f       i
+
+          i = 8
+          [a a a b c b b c a a d], cache: { c => 1, a => 1 }
+                         ^ ^
+                         f i
+
+          i = 9
+          [a a a b c b b c a a d], cache: { c => 1, a => 2 }
+                         ^   ^
+                         f   i
+
+          i = 10
+          [a a a b c b b c a a d], cache: { a => 2, d => 1 }
+                           ^   ^
+                           f   i
+        */
         while (window.size > k) {
             const firstItem = items[first]
 
@@ -114,6 +116,7 @@ const lengthOfLongestSubstringKDistinct = (k, items) => {
     return longest
 }
 
+
 const totalFruit = fruits => {
     return lengthOfLongestSubstringKDistinct(2, fruits)
 }
@@ -125,3 +128,4 @@ console.assert(totalFruit([1,2,3,2,2]) === 4)
 console.assert(totalFruit([0,1,2]) === 2)
 console.assert(totalFruit([3,3,3,1,2,1,1,2,3,3,4]) === 5)
 console.assert(totalFruit([0,0,1,1]) === 4)
+

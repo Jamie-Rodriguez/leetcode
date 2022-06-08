@@ -42,8 +42,9 @@
   1. Remove all islands that touch the edge of the grid,
       since they are not defined as a closed island.
   2. The problem is now identical to problem "200. Number of Islands".
-      i.e. count up the remaining islands.
+      i.e. Count up the remaining islands.
 */
+
 
 // Because I keep getting these mixed-up...
 const LAND = 0
@@ -103,6 +104,7 @@ const removeEdgeLands = grid => {
     }
 }
 
+
 const closedIsland = grid => {
     let numEnclaves = 0
 
@@ -147,3 +149,4 @@ console.assert(closedIsland([[0,0,1,1,0,1,0,0,1,0],
                              [1,1,1,1,1,1,0,0,0,0],
                              [1,1,1,0,0,1,0,1,0,1],
                              [1,1,1,0,1,1,0,1,1,0]]) === 5)
+

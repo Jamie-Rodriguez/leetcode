@@ -25,6 +25,7 @@
       -10^6 <= nums1[i], nums2[i] <= 10^6
 */
 
+
 /*
   Let's start with an example
 
@@ -142,6 +143,8 @@ const findMedianSortedArrays = (nums1, nums2) => {
     }
 }
 
+
 console.assert(findMedianSortedArrays([1, 3], [2]) === 2)
 console.assert(findMedianSortedArrays([1, 2], [3, 4]) === 2.5)
 console.assert(findMedianSortedArrays([1, 2, 3, 4], [5, 6, 7, 8]) === 4.5)
+

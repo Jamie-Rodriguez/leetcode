@@ -25,6 +25,7 @@
       s consists of English letters, digits, symbols and spaces.
 */
 
+
 const lengthOfLongestSubstring = s => {
     const seen = {}
     let left = 0
@@ -87,6 +88,7 @@ const lengthOfLongestSubstring = s => {
     return maxDistance
 }
 
+
 console.assert(lengthOfLongestSubstring('abcabcbb') === 3)
 console.assert(lengthOfLongestSubstring('bbbbb') === 1)
 console.assert(lengthOfLongestSubstring('pwwkew') === 3)
@@ -94,3 +96,4 @@ console.assert(lengthOfLongestSubstring('abba') === 2)
 console.assert(lengthOfLongestSubstring('') === 0)
 console.assert(lengthOfLongestSubstring(' ') === 1)
 console.assert(lengthOfLongestSubstring('acbdackkl') === 5)
+

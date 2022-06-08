@@ -37,33 +37,74 @@
 
 // This problem is just "Longest Substring with At Most K Distinct Characters",
 // where K = 2
-const lengthOfLongestSubstringKDistinct = (k, fruits) => {
-    if (!fruits) {
+const lengthOfLongestSubstringKDistinct = (k, items) => {
+    if (!items) {
         return 0
     }
 
     let first = 0
     let longest = 0
-    const counts = new Map() // fruit -> # occurrences
+    const window = new Map() // item -> number of occurrences seen
 
-    for (let i = 0; i < fruits.length; i++) {
-        const currentFruit = fruits[i]
+    for (let i = 0; i < items.length; i++) {
+        const currentItem = items[i]
 
-        // Increment the current fruit count
-        counts.set(currentFruit, (counts.has(currentFruit) ? counts.get(currentFruit) : 0) + 1)
+        // Increment the count of the current item
+        window.set(currentItem, (window.has(currentItem)
+                                ? window.get(currentItem)
+                                : 0) + 1)
 
-        while (counts.size > k) {
-            const firstFruit = fruits[first]
+        // If the new item hasn't been seen before, then the window of
+        // previously-seen items now has k + 1 distinct items...
+        // We loop: incrementing the 'first' pointer and decrementing the
+        // occurrences-counter of the item pointed to by 'first' - effectively
+        // shrinking the window to next time it is in a 'legal' state - i.e.
+        // where the window only contains 'k' distinct items.
+        // Example for k = 2:
+        // [a a a b c b b c a a d]
+        //
+        // i = 0 -> 3
+        // [a a a b c b b c a a d], cache: { a => 3, b => 1 }
+        //  ^     ^
+        //  f     i
+        //
+        // i = 4
+        // [a a a b c b b c a a d], cache: { b => 1, c => 1 }
+        //        ^ ^
+        //        f i
+        //
+        // i = 5 -> 7
+        // [a a a b c b b c a a d], cache: { b => 3, c => 2 }
+        //        ^       ^
+        //        f       i
+        //
+        // i = 8
+        // [a a a b c b b c a a d], cache: { c => 1, a => 1 }
+        //                ^ ^
+        //                f i
+        //
+        // i = 9
+        // [a a a b c b b c a a d], cache: { c => 1, a => 2 }
+        //                ^   ^
+        //                f   i
+        //
+        // i = 10
+        // [a a a b c b b c a a d], cache: { a => 2, d => 1 }
+        //                  ^   ^
+        //                  f   i
+        while (window.size > k) {
+            const firstItem = items[first]
 
-            // Decrement the count of the first fruit
-            counts.set(firstFruit, counts.get(firstFruit) - 1)
+            // Decrement the count of the item type pointed to by 'first'
+            window.set(firstItem, window.get(firstItem) - 1)
 
-            // If the count of the first fruit is 0, remove it from the map
-            if (counts.get(firstFruit) === 0) {
-                counts.delete(firstFruit)
+            // If the count of the item type pointed to by 'first' is 0, remove
+            // it from the map
+            if (window.get(firstItem) === 0) {
+                window.delete(firstItem)
             }
 
-            // Increment the first fruit pointer
+            // Increment the 'first' pointer i.e. shrink the window to the right
             first++
         }
 

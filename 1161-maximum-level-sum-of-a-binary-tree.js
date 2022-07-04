@@ -38,10 +38,6 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
-/**
- * @param {TreeNode} root
- * @return {number}
- */
 const maxLevelSum = root => {
     if (root === null) return 0
 
@@ -71,5 +67,18 @@ const maxLevelSum = root => {
 }
 
 
-console.assert(largestTimeFromDigits([1,7,0,7,-8,null,null]) === 2)
-console.assert(largestTimeFromDigits([989,null,10250,98693,-89388,null,null,null,-32127]) === 2)
+const arrayToBinaryTree = (arr, i=0) => {
+    while (i < arr.length) {
+        const node = { val: arr[i], left: null, right: null }
+
+        node.left = arrayToBinaryTree(arr, 2 * i + 1)
+        node.right = arrayToBinaryTree(arr, 2 * i + 2)
+
+        return node
+    }
+
+    return null
+}
+
+console.assert(maxLevelSum(arrayToBinaryTree([1,7,0,7,-8,null,null])) === 2)
+console.assert(maxLevelSum(arrayToBinaryTree([989,null,10250,98693,-89388,null,null,null,-32127])) === 2)

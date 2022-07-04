@@ -38,11 +38,6 @@
  *     this.right = (right===undefined ? null : right)
  * }
  */
-
-/**
- * @param {TreeNode} root
- * @return {number}
- */
  const diameterOfBinaryTree = root => {
     let diameter = 0
 
@@ -62,3 +57,20 @@
     dfs(root)
     return diameter
 }
+
+
+const arrayToBinaryTree = (arr, i=0) => {
+    while (i < arr.length) {
+        const node = { val: arr[i], left: null, right: null }
+
+        node.left = arrayToBinaryTree(arr, 2 * i + 1)
+        node.right = arrayToBinaryTree(arr, 2 * i + 2)
+
+        return node
+    }
+
+    return null
+}
+
+console.assert(diameterOfBinaryTree(arrayToBinaryTree([1,2,3,4,5])) === 3)
+console.assert(diameterOfBinaryTree(arrayToBinaryTree([1,2])) === 1)

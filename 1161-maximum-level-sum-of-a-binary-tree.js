@@ -51,11 +51,11 @@ const maxLevelSum = root => {
     while (queue.length > 0) {
         const width = queue.length
         let sum = 0
-        
+
         for (let i = 0; i < width; i++) {
             const current = queue.pop()
             sum += current.val
-            
+
             if (current.left) {
                 queue.unshift(current.left)
             }
@@ -63,10 +63,10 @@ const maxLevelSum = root => {
                 queue.unshift(current.right)
             }
         }
-        
+
         sums.push(sum)
     }
-    
+
     return sums.reduce((maxIndex, sum, i) => sum > sums[maxIndex] ? i : maxIndex, 0) + 1
 }
 

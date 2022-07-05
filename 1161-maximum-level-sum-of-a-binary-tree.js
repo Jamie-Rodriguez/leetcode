@@ -68,7 +68,7 @@ const maxLevelSum = root => {
 
 
 const arrayToBinaryTree = (arr, i=0) => {
-    while (i < arr.length) {
+    if (i < arr.length) {
         const node = { val: arr[i], left: null, right: null }
 
         node.left = arrayToBinaryTree(arr, 2 * i + 1)

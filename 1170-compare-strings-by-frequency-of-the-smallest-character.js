@@ -55,6 +55,32 @@ const numSmallerByFrequency = (queries, words) => {
     return queriesFreqs.map(q => wordsFreqs.reduce((n, freq) => q < freq ? n + 1 : n, 0))
 }
 
+const numSmallerByFrequencyBSearch = (queries, words) => {
+    // Letting q = # queries, w = # words
+    // O(q)
+    const queriesFreqs = queries.map(q => frequencySmallestLetter(q))
+    // O(w * log(w))
+    const wordsFreqs = words.map(w => frequencySmallestLetter(w)).sort((a, b) => a - b)
+
+    // O(q * log(w))
+    return queriesFreqs.map(q => {
+        let left = 0
+        let right = wordsFreqs.length - 1
+
+        while (left <= right) {
+            let middle = left + Math.floor((right - left) / 2)
+
+            if (q < wordsFreqs[middle]) {
+                right = middle - 1
+            } else {
+                left = middle + 1
+            }
+        }
+
+        return wordsFreqs.length - (right + 1)
+    })
+}
+
 
 const compareArrays = (a, b) => {
     if (a.length !== b.length) {
@@ -72,3 +98,13 @@ const compareArrays = (a, b) => {
 
 console.assert(compareArrays(numSmallerByFrequency(["cbd"],["zaaaz"]), [1]))
 console.assert(compareArrays(numSmallerByFrequency(["bbb","cc"],["a","aa","aaa","aaaa"]), [1,2]))
+console.assert(compareArrays(numSmallerByFrequency(["bba","abaaaaaa","aaaaaa","bbabbabaab","aba","aa","baab","bbbbbb","aab","bbabbaabb"],
+                                                   ["aaabbb","aab","babbab","babbbb","b","bbbbbbbbab","a","bbbbbbbbbb","baaabbaab","aa"]),
+                             [6,1,1,2,3,3,3,1,3,2]))
+
+console.assert(compareArrays(numSmallerByFrequencyBSearch(["cbd"],["zaaaz"]), [1]))
+console.assert(compareArrays(numSmallerByFrequencyBSearch(["bbb","cc"],["a","aa","aaa","aaaa"]), [1,2]))
+console.assert(compareArrays(numSmallerByFrequencyBSearch(["bba","abaaaaaa","aaaaaa","bbabbabaab","aba","aa","baab","bbbbbb","aab","bbabbaabb"],
+                                                          ["aaabbb","aab","babbab","babbbb","b","bbbbbbbbab","a","bbbbbbbbbb","baaabbaab","aa"]),
+                             [6,1,1,2,3,3,3,1,3,2]))
+

@@ -68,6 +68,25 @@ const lengthOfLIS = nums => {
     return sequence.length
 }
 
+// Dynamic programming solution
+// O(n^2)
+const lengthOfLIS2 = nums => {
+    let lis = 1
+    let lengthLisFromIndex = Array(nums.length).fill(1)
+
+    // Go in reverse order and build up the LIS from each index until we get to
+    // the start
+    for (let i = nums.length - 1; i >= 0; i--)
+        for (let j = i + 1; j < nums.length; j++)
+            if (nums[i] < nums[j]) {
+                lengthLisFromIndex[i] = Math.max(lengthLisFromIndex[i],
+                                                 1 + lengthLisFromIndex[j])
+                lis = Math.max(lis, lengthLisFromIndex[i])
+            }
+
+    return lis
+}
+
 
 console.assert(lengthOfLIS([10,9,2,5,3,7,101,18]) === 4)
 console.assert(lengthOfLIS([0,1,0,3,2,3]) === 4)

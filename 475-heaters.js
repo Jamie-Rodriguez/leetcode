@@ -39,21 +39,18 @@ const distanceToClosestHeater = (house, heaters) => {
     while (left <= right) {
         const middle = left + Math.floor((right - left) / 2)
 
-        if (heaters[middle] <= house && house <= heaters[middle + 1]) {
+        if (heaters[middle] <= house && house <= heaters[middle + 1])
             return Math.min(house - heaters[middle], heaters[middle + 1] - house)
-        } else if (heaters[middle] <= house) {
+        else if (heaters[middle] <= house)
             left = middle + 1
-        } else {
+        else
             right = middle - 1
-        }
     }
 
-    if (left === 0) {
+    if (left === 0)
         return heaters[0] - house
-    }
-    if (right === heaters.length - 1) {
+    if (right === heaters.length - 1)
         return house - heaters[heaters.length - 1]
-    }
 }
 
 

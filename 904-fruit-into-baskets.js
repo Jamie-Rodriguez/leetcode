@@ -38,9 +38,8 @@
 // This problem is just "Longest Substring with At Most K Distinct Characters",
 // where K = 2
 const lengthOfLongestSubstringKDistinct = (k, items) => {
-    if (!items) {
+    if (!items)
         return 0
-    }
 
     let first = 0
     let longest = 0
@@ -102,9 +101,8 @@ const lengthOfLongestSubstringKDistinct = (k, items) => {
 
             // If the count of the item type pointed to by 'first' is 0, remove
             // it from the map
-            if (window.get(firstItem) === 0) {
+            if (window.get(firstItem) === 0)
                 window.delete(firstItem)
-            }
 
             // Increment the 'first' pointer i.e. shrink the window to the right
             first++

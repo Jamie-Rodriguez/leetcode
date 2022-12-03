@@ -29,20 +29,18 @@
 
 
 const searchRange = (nums, target) => {
-    if (nums.length < 1) {
+    if (nums.length < 1)
         return [-1, -1]
-    }
 
     let left = 0
     let right = nums.length - 1
     while (left <= right) {
         const middle = left + Math.floor((right - left) / 2)
 
-        if (nums[middle] < target) {
+        if (nums[middle] < target)
             left = middle + 1
-        } else {
+        else
             right = middle - 1
-        }
     }
 
     const leftBound = left
@@ -54,11 +52,10 @@ const searchRange = (nums, target) => {
     while (left <= right) {
         const middle = left + Math.floor((right - left) / 2)
 
-        if (nums[middle] <= target) {
+        if (nums[middle] <= target)
             left = middle + 1
-        } else {
+        else
             right = middle - 1
-        }
     }
 
     const rightBound = right
@@ -68,15 +65,12 @@ const searchRange = (nums, target) => {
 
 
 const compareArrays = (a, b) => {
-    if (a.length !== b.length) {
+    if (a.length !== b.length)
         return false
-    }
 
-    for (let i = 0; i < a.length; i++) {
-        if (a[i] !== b[i]) {
+    for (let i = 0; i < a.length; i++)
+        if (a[i] !== b[i])
             return false
-        }
-    }
 
     return true
 }

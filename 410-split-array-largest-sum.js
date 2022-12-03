@@ -36,6 +36,7 @@ const numSubArrays = (nums, max) => {
 
     for (let i = 0; i < nums.length; i++) {
         currentSum += nums[i]
+
         if (currentSum > max) {
             currentSum = nums[i]
             splits++
@@ -62,9 +63,8 @@ const splitArray = (nums, m) => {
         if (numSubArrays(nums, mid) <= m) {
             right = mid - 1
             largestSum = mid
-        } else {
+        } else
             left = mid + 1
-        }
     }
 
     return largestSum

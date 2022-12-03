@@ -78,9 +78,8 @@ const lengthOfLongestSubstring = s => {
         // Effectively just:
         //     maxDistance = Math.max(maxDistance, right - left + 1)
         const currentDistance = right - left + 1
-        if (currentDistance > maxDistance) {
+        if (currentDistance > maxDistance)
             maxDistance = currentDistance
-        }
 
         // This updates the 'seen' map with the
         // latest-seen indexes of each letter in the map

@@ -31,20 +31,18 @@
 const binarySearchInsert = (arr, num, left=0, right=arr.length-1) => {
     if (left > right) {
         // Don't do anything if 'n' already exists in 'sequence'
-        if (num === arr[right]) {
+        if (num === arr[right])
             return arr
-        } else {
+        else
             return arr.splice(right + 1, 1, num)
-        }
     }
 
     const middleIndex = left + Math.floor((right - left) / 2)
 
-    if (num < arr[middleIndex]) {
+    if (num < arr[middleIndex])
         return binarySearchInsert(arr, num, left, middleIndex-1)
-    } else {
+    else
         return binarySearchInsert(arr, num, middleIndex+1, right)
-    }
 }
 
 
@@ -56,13 +54,12 @@ const lengthOfLIS = nums => {
     let sequence = []
 
     for (n of nums) {
-        if ((sequence.length === 0) || (n > sequence[sequence.length - 1])) {
+        if ((sequence.length === 0) || (n > sequence[sequence.length - 1]))
             sequence.push(n)
-        } else if (n < sequence[0]) {
+        else if (n < sequence[0])
             sequence[0] = n
-        } else if (n < sequence[sequence.length - 1]) {
+        else if (n < sequence[sequence.length - 1])
             binarySearchInsert(sequence, n)
-        }
     }
 
     return sequence.length

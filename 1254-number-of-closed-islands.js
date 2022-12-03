@@ -55,9 +55,8 @@ const floodFill = (grid, r, c, visited=[]) => {
     // Hit the edge, return false
     if (r < 0 || r > grid.length - 1
             || c < 0 || c > grid[r].length - 1
-            || visited.some(coord => r === coord.r && c === coord.c)) {
+            || visited.some(coord => r === coord.r && c === coord.c))
         return
-    }
 
     // Set the land-tiles we encounter to WATER
     // so that we don't consider them again
@@ -72,9 +71,8 @@ const floodFill = (grid, r, c, visited=[]) => {
         // Only if the new tile is land, call floodFill()
         if (newR >= 0 && newR < grid.length
                 && newC >= 0 && newC < grid[newR].length
-                && grid[newR][newC] === LAND) {
+                && grid[newR][newC] === LAND)
             floodFill(grid, newR, newC, visited)
-        }
     }
 
     return
@@ -82,26 +80,19 @@ const floodFill = (grid, r, c, visited=[]) => {
 
 const removeEdgeLands = grid => {
     // Top row
-    for (let c = 0; c < grid[0].length; c++) {
-        if (grid[0][c] === LAND) {
+    for (let c = 0; c < grid[0].length; c++)
+        if (grid[0][c] === LAND)
             floodFill(grid, 0, c, [])
-        }
-    }
     // Left and right columns
-    for (let r = 1; r < grid.length - 1; r++) {
-        for (let c = 0; c < grid[r].length; c += grid[r].length - 1) {
-            if (grid[r][c] === LAND) {
+    for (let r = 1; r < grid.length - 1; r++)
+        for (let c = 0; c < grid[r].length; c += grid[r].length - 1)
+            if (grid[r][c] === LAND)
                 floodFill(grid, r, c, [])
-            }
-        }
-    }
     // Bottom row
     const finalRow = grid.length - 1
-    for (let c = 0; c < grid[finalRow].length; c++) {
-        if (grid[finalRow][c] === LAND) {
+    for (let c = 0; c < grid[finalRow].length; c++)
+        if (grid[finalRow][c] === LAND)
             floodFill(grid, finalRow, c, [])
-        }
-    }
 }
 
 
@@ -111,14 +102,12 @@ const closedIsland = grid => {
     removeEdgeLands(grid)
 
     // Don't even need to look at top and bottom rows, or left and right edges
-    for (let r = 1; r < grid.length - 1; r++) {
-        for (let c = 1; c < grid[r].length - 1; c++) {
+    for (let r = 1; r < grid.length - 1; r++)
+        for (let c = 1; c < grid[r].length - 1; c++)
             if (grid[r][c] === LAND) {
                 floodFill(grid, r, c, [])
                 numEnclaves++
             }
-        }
-    }
 
     return numEnclaves
 }

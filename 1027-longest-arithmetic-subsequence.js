@@ -37,7 +37,7 @@ const longestArithSeqLength = nums => {
 
     // Go in reverse order and build up the LAS from each index until we get to
     // the start
-    for (let i = nums.length - 1; i >= 0; i--) {
+    for (let i = nums.length - 1; i >= 0; i--)
         for (let j = i + 1; j < nums.length; j++) {
             const diff = nums[j] - nums[i]
 
@@ -46,7 +46,6 @@ const longestArithSeqLength = nums => {
 
             las = Math.max(las, lengthLasFromIndex[i].get(diff))
         }
-    }
 
     return las
 }

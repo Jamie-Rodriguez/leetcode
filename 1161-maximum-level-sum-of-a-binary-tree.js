@@ -39,7 +39,8 @@
  * }
  */
 const maxLevelSum = root => {
-    if (root === null) return 0
+    if (root === null)
+        return 0
 
     const queue = [root]
     const sums = []
@@ -52,12 +53,10 @@ const maxLevelSum = root => {
             const current = queue.pop()
             sum += current.val
 
-            if (current.left) {
+            if (current.left)
                 queue.unshift(current.left)
-            }
-            if (current.right) {
+            if (current.right)
                 queue.unshift(current.right)
-            }
         }
 
         sums.push(sum)

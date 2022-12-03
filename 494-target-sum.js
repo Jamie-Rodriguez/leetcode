@@ -49,13 +49,11 @@ const findTargetSumWays = (nums, target) => {
     const dp = (index, sum) => {
         const key = `i:${index}, sum:${sum}`
 
-        if (cache.has(key)) {
+        if (cache.has(key))
             return cache.get(key)
-        }
 
-        if (index === nums.length) {
+        if (index === nums.length)
             return sum === target ? 1 : 0
-        }
 
         cache.set(key, dp(index + 1, sum + nums[index]) + dp(index + 1, sum - nums[index]))
 

@@ -44,9 +44,8 @@ const minDominoRotations = (tops, bottoms) => {
 
     // Constraints: bottoms.length == tops.length
     for (let i = 0; i < tops.length; i++) {
-        if (tops[i] === bottoms[i]) {
+        if (tops[i] === bottoms[i])
             symmetricalDominoesFreqs[tops[i]]++
-        }
 
         topsFreqs[tops[i]]++
         bottomsFreqs[bottoms[i]]++
@@ -72,9 +71,8 @@ const minDominoRotations = (tops, bottoms) => {
         for (let i = 1; i < topsFreqs.length; i++) {
             const min = Math.min(topsFreqs[i], bottomsFreqs[i])
 
-            if ((topsFreqs[i] + bottomsFreqs[i] === tops.length)) {
+            if ((topsFreqs[i] + bottomsFreqs[i] === tops.length))
                 numSwaps = Math.min(numSwaps, min)
-            }
         }
 
         return numSwaps <= tops.length ? numSwaps : -1

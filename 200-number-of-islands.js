@@ -50,9 +50,8 @@ const dfs = (grid, r, c, visited=[]) => {
     //     - Reached ocean
     if (r < 0 || c < 0 || r >= grid.length || c >= grid[r].length
            || visited.some(coord => coord.r === r && coord.c === c)
-           || grid[r][c] !== '1') {
+           || grid[r][c] !== '1')
         return
-    }
 
     // Type of 'grid' is actually char[][]
     grid[r][c] = '0'
@@ -101,8 +100,8 @@ const bfs = (grid, startRow, startColumn) => {
 const numIslands = grid => {
     let numIslands = 0
 
-    for (let r = 0; r < grid.length; r++) {
-        for (let c = 0; c < grid[r].length; c++) {
+    for (let r = 0; r < grid.length; r++)
+        for (let c = 0; c < grid[r].length; c++)
             // Found some land
             if (grid[r][c] === '1') {
                 // Mutate 'grid': Flood-fill the land cells directly connected as 0
@@ -111,8 +110,6 @@ const numIslands = grid => {
                 dfs(grid, r, c)
                 numIslands++
             }
-        }
-    }
 
     return numIslands
 }

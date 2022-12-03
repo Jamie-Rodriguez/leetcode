@@ -55,9 +55,8 @@ const recursiveDfs = (image, r, c, oldColor, newColor, visited=[]) => {
     if (r < 0 || c < 0 || r >= image.length || c >= image[r].length
         || visited.some(coord => coord.r === r && coord.c === c)
         || image[r][c] !== oldColor
-        || image[r][c] === newColor) {
+        || image[r][c] === newColor)
         return image
-    }
 
     image[r][c] = newColor
     visited.push({r, c})
@@ -86,9 +85,8 @@ const bfs = (image, sr, sc, oldColor, newColor) => {
         if (r < 0 || c < 0 || r >= image.length || c >= image[r].length
             || visited.some(coord => coord.r === r && coord.c === c)
             || image[r][c] !== oldColor
-            || image[r][c] === newColor) {
+            || image[r][c] === newColor)
             continue
-        }
 
         image[r][c] = newColor
         visited.push({r, c})
@@ -113,13 +111,21 @@ const deepComparison = (a, b) => JSON.stringify(a) === JSON.stringify(b)
 
 console.assert(
     deepComparison(
-        floodFill([[1,1,1],[1,1,0],[1,0,1]], 1, 1, 2),
-        [[2,2,2],[2,2,0],[2,0,1]]))
+        floodFill([[1,1,1],
+                   [1,1,0],
+                   [1,0,1]], 1, 1, 2),
+        [[2,2,2],
+         [2,2,0],
+         [2,0,1]]))
 console.assert(
     deepComparison(
-        floodFill([[0,0,0],[0,0,0]], 0, 0, 2),
-        [[2,2,2],[2,2,2]]))
+        floodFill([[0,0,0],
+                   [0,0,0]], 0, 0, 2),
+        [[2,2,2],
+         [2,2,2]]))
 console.assert(
     deepComparison(
-        floodFill([[0,0,0],[0,1,0]], 1, 1, 1),
-        [[0,0,0],[0,1,0]]))
+        floodFill([[0,0,0],
+                   [0,1,0]], 1, 1, 1),
+        [[0,0,0],
+         [0,1,0]]))

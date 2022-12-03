@@ -61,18 +61,14 @@ function* createBridgeIterator(rows, columns) {
 const neighbouringBridges = (river, timestep, { row, column }) => {
     const neighbours = []
 
-    if (row > 0) {
+    if (row > 0)
         neighbours.push({ row: row - 1, column })
-    }
-    if (column > 0) {
+    if (column > 0)
         neighbours.push({ row, column: column - 1 })
-    }
-    if (row < (river.length - 1)) {
+    if (row < (river.length - 1))
         neighbours.push({ row: row + 1, column })
-    }
-    if (column < (river[row].length - 1)) {
+    if (column < (river[row].length - 1))
         neighbours.push({ row, column: column + 1 })
-    }
 
     return neighbours.filter(({ row: r, column: c }) => river[r][c] <= timestep)
 }
@@ -94,16 +90,14 @@ const bfs = (river, timestep, start) => {
     while (queue.length > 0) {
         const current = queue.pop()
         // Goal: reached the right-hand side of the river
-        if (current.column === (river[current.row].length - 1)) {
+        if (current.column === (river[current.row].length - 1))
             return true
-        }
 
-        for (const neighbour of neighbouringBridges(river, timestep, current)) {
+        for (const neighbour of neighbouringBridges(river, timestep, current))
             if (!visited.has(coordinateToString(neighbour))) {
                 queue.unshift(neighbour)
                 visited.add(coordinateToString(neighbour))
             }
-        }
     }
 
     return false
@@ -119,16 +113,14 @@ const dfs = (river, timestep, start) => {
     while (stack.length > 0) {
         const current = stack.pop()
         // Goal: reached the right-hand side of the river
-        if (current.column === (river[current.row].length - 1)) {
+        if (current.column === (river[current.row].length - 1))
             return true
-        }
 
         if (!visited.has(coordinateToString(current))) {
             visited.add(coordinateToString(current))
 
-            for (const neighbour of neighbouringBridges(river, timestep, current)) {
+            for (const neighbour of neighbouringBridges(river, timestep, current))
                 stack.push(neighbour)
-            }
         }
     }
 
@@ -142,11 +134,9 @@ const riverIsTraversible = (river, timestep, start) => dfs(river, timestep, star
 const getStartingBridges = (river, timestep) => {
     const bridges = []
 
-    for (let r = 0; r < river.length; r++) {
-        if (river[r][0] <= timestep) {
+    for (let r = 0; r < river.length; r++)
+        if (river[r][0] <= timestep)
             bridges.push({ row: r, column: 0 })
-        }
-    }
 
     return bridges
 }
@@ -181,21 +171,19 @@ const main = (rows, columns) => {
 
         // O(#rows)
         let isTraversible = false
-        for (const bridge of startingBridges) {
+        for (const bridge of startingBridges)
             // O(N)
             if (riverIsTraversible(river, currentTimestep, bridge)) {
                 isTraversible = true
                 break
             }
-        }
 
-        if (isTraversible) {
+        if (isTraversible)
             // Go further back in time
             right = currentTimestep - 1
-        } else {
+        else
             // Go forward in time
             left = currentTimestep + 1
-        }
     }
 
     return left

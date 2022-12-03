@@ -25,9 +25,8 @@
 
 
 const robRecurMemo = (nums, i, cache) => {
-    if (i >= nums.length) {
+    if (i >= nums.length)
         return 0
-    }
 
     /*
       At every 'i'th house, there are two options:
@@ -37,9 +36,8 @@ const robRecurMemo = (nums, i, cache) => {
          We don't get any value, examine next house 'i+1'
       We will take whichever decision gives us the greater return
     */
-    if (cache[i] === undefined) {
+    if (cache[i] === undefined)
         cache[i] = Math.max(nums[i] + robRecurMemo(nums, i+2, cache), robRecurMemo(nums, i+1, cache))
-    }
 
     return cache[i]
 }
@@ -47,18 +45,16 @@ const robRecurMemo = (nums, i, cache) => {
 const robIterative = nums => {
     // Skip if length == 1 because otherwise
     // we write to cache[1], which breaks the return at the end
-    if (nums.length === 1) {
+    if (nums.length === 1)
         return nums[0]
-    }
 
     // Cache is the cumulative sum of the maximum possible value at index i
     const cache = Array(nums.length).fill(undefined)
     cache[0] = nums[0]
     cache[1] = Math.max(nums[0], nums[1])
 
-    for (let i = 2; i < nums.length; i++) {
+    for (let i = 2; i < nums.length; i++)
         cache[i] = Math.max(nums[i] + cache[i-2], cache[i-1])
-    }
 
     return cache[cache.length - 1]
 }

@@ -40,16 +40,15 @@ const isValid = s => {
     }
 
     for (const char of s) {
-        if (opening[char]) {
+        if (opening[char])
             stack.push(char)
-        } else if (closing[char]) {
+        else if (closing[char]) {
             const bracket = stack.pop()
 
             // Current character, which is a closing bracket;
             // doesn't match the last-pushed opening bracket
-            if (bracket !== closing[char]) {
+            if (bracket !== closing[char])
                 return false
-            }
         }
         // Could have an else-statement here
         // to deal with characters that aren't in the known brackets set

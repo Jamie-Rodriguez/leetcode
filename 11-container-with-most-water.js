@@ -147,11 +147,10 @@ const maxArea = height => {
             } else {
                 left++
             }
-        } else if (height[left] < height[right]) {
+        } else if (height[left] < height[right])
             left++
-        } else {
+        else
             right--
-        }
     }
 
     return maxArea

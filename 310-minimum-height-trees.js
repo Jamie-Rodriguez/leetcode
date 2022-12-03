@@ -45,9 +45,8 @@
 // and continuing inwards until <= 2 nodes remain.
 const findMinHeightTrees = (n, edges) => {
     // This is a real test case - why??
-    if (n === 1) {
+    if (n === 1)
         return [0]
-    }
 
     // Note: fill() here creates references to the same initialised array!
     // So if you were to then use adjacencyList[start].push(dest) in the loop,
@@ -62,12 +61,10 @@ const findMinHeightTrees = (n, edges) => {
     }
 
     let leaves = []
-    for (let node = 0; node < n; node++) {
+    for (let node = 0; node < n; node++)
         // By definition a leaf node will have degree = 1
-        if (adjacencyList[node].length === 1) {
+        if (adjacencyList[node].length === 1)
             leaves.push(node)
-        }
-    }
 
     let remainingNodes = n
     // There can't be more than two minimum height trees
@@ -86,9 +83,8 @@ const findMinHeightTrees = (n, edges) => {
                 adjacencyList[neighbour].indexOf(leaf), 1)
 
             // If the removal above makes 'neighbour' into a leaf, add it
-            if (adjacencyList[neighbour].length === 1) {
+            if (adjacencyList[neighbour].length === 1)
                 newLeaves = [ ...newLeaves, neighbour ]
-            }
         }
 
         leaves = newLeaves

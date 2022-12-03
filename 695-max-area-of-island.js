@@ -54,7 +54,7 @@ const dfs = (grid, r, c, visited=[]) => {
 const maxAreaOfIsland = grid => {
     let maxArea = 0
 
-    for (let r = 0; r < grid.length; r++) {
+    for (let r = 0; r < grid.length; r++)
         for (let c = 0; c < grid[r].length; c++) {
             // Found some land
             if (grid[r][c] === 1) {
@@ -62,12 +62,10 @@ const maxAreaOfIsland = grid => {
                 // So we don't consider them when counting islands
                 const area = dfs(grid, r, c)
 
-                if (area > maxArea) {
+                if (area > maxArea)
                     maxArea = area
-                }
             }
         }
-    }
 
     return maxArea
 }

@@ -135,11 +135,10 @@ const findMedianSortedArrays = (nums1, nums2) => {
         // Need to offset the next search bound by 1 to prevent infinite looping
         // in the case that all element in m are less than all elements in n
         // i.e. m = [1, 2, 3, 4], n = [5, 6, 7, 8]
-        if (mLeft > nRight) {
+        if (mLeft > nRight)
             bSearchRight = splitPointM - 1
-        } else {
+        else
             bSearchLeft = splitPointM + 1
-        }
     }
 }
 

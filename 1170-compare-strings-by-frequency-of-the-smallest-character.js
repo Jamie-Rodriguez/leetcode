@@ -34,9 +34,8 @@ const frequencySmallestLetter = word => {
 
     for (const letter of word) {
         // In JavaScript, characters can be compared lexicographically directly
-        if (letter < smallestChar) {
+        if (letter < smallestChar)
             smallestChar = letter
-        }
 
         frequencies[letter] = (frequencies[letter] || 0) + 1
     }
@@ -70,11 +69,10 @@ const numSmallerByFrequencyBSearch = (queries, words) => {
         while (left <= right) {
             let middle = left + Math.floor((right - left) / 2)
 
-            if (q < wordsFreqs[middle]) {
+            if (q < wordsFreqs[middle])
                 right = middle - 1
-            } else {
+            else
                 left = middle + 1
-            }
         }
 
         return wordsFreqs.length - (right + 1)
@@ -83,15 +81,12 @@ const numSmallerByFrequencyBSearch = (queries, words) => {
 
 
 const compareArrays = (a, b) => {
-    if (a.length !== b.length) {
+    if (a.length !== b.length)
         return false
-    }
 
-    for (let i = 0; i < a.length; i++) {
-        if (a[i] !== b[i]) {
+    for (let i = 0; i < a.length; i++)
+        if (a[i] !== b[i])
             return false
-        }
-    }
 
     return true
 }

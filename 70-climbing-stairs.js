@@ -26,19 +26,42 @@
 */
 
 
-const climbStairs = n => {
-    // number of 'n' stairs -> how many distinct ways to climb 'n' stairs
-    const howManyWays = Array(n + 1).fill(-Infinity)
-    // Base cases
-    howManyWays[0] = 1
-    howManyWays[1] = 1
-    // Start at n = 2 because we already know the base cases
-    for (let numStairs = 2; numStairs < n + 1; numStairs++)
-        // We can either take one step or two steps,
-        // We can simply add the number of ways for n - 1 and n - 2 steps
-        howManyWays[numStairs] = howManyWays[numStairs - 1] + howManyWays[numStairs - 2]
+const climbStairsTopDownMemoised = n => {
+    const cache = Array(n + 1).fill(undefined)
+    // We don't actually hit these base cases,
+    // but I included them for completeness' sake...
+    cache[0] = 1
+    cache[1] = 1
+    cache[2] = 2
 
-    return howManyWays[n]
+    const numPaths = n => {
+        // Base cases
+        if (n === 1)
+            return 1
+        if (n === 2)
+            return 2
+        // Cache hit
+        if (cache[n])
+            return cache[n]
+
+        // Not in cache - compute new result
+        return cache[n] = numPaths(n - 1) + numPaths(n - 2)
+    }
+
+    return numPaths(n)
+}
+
+const climbStairsBottomUpTabular = n => {
+    const subProblem = Array(n + 1).fill(undefined)
+    // Base cases
+    subProblem[0] = 1
+    subProblem[1] = 1
+    subProblem[2] = 2
+
+    for (let i = 3; i <= n; i++)
+        subProblem[i] = subProblem[i - 1] + subProblem[i - 2]
+
+    return subProblem[n]
 }
 
 

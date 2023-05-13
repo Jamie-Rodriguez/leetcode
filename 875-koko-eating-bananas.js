@@ -23,9 +23,9 @@
       Output: 23
 
   Constraints:
-      1 <= piles.length <= 104
-      piles.length <= h <= 109
-      1 <= piles[i] <= 109
+      1 <= piles.length <= 10^4
+      piles.length <= h <= 10^9
+      1 <= piles[i] <= 10^9
 */
 
 
@@ -39,7 +39,7 @@ const binarySearch = (piles, maxTime) => {
     let right = Math.max(...piles)
 
     while (left <= right) {
-        let middle = left + Math.floor((right - left) / 2)
+        const middle = left + Math.floor((right - left) / 2)
 
         if (timeTakenToEatBananas(piles, middle) <= maxTime)
             right = middle - 1

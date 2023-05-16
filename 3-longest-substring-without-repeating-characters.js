@@ -26,7 +26,7 @@
 */
 
 
-const lengthOfLongestSubstring = s => {
+const lengthOfLongestSubstringInitialAttempt = s => {
     const seen = {}
     let left = 0
     let maxDistance = 0
@@ -87,6 +87,28 @@ const lengthOfLongestSubstring = s => {
     }
 
     return maxDistance
+}
+
+const lengthOfLongestSubstring = s => {
+    let left = 0
+    // Could use a map of type:
+    //     letter -> position/index in string
+    const seen = new Set()
+    let longestSubstringLength = 0
+
+    for (let right = 0; right < s.length; right++) {
+        while (seen.has(s[right])) {
+            seen.delete(s[left])
+            left++
+        }
+
+        seen.add(s[right])
+        // In the case of seen.has(s[right]) == true,
+        // right - left + 1 will always <= longestSubstringLength
+        longestSubstringLength = Math.max(right - left + 1, longestSubstringLength)
+    }
+
+    return longestSubstringLength
 }
 
 

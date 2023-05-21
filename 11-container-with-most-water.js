@@ -129,36 +129,30 @@
   And we've now searched the array, the largest are we saw was with pointers l: 1, r: 8, giving an area of 49.
 */
 
+
 const maxArea = height => {
-    // Problem description says that 2 <= height.length <= 10^5
-    // So don't have to worry about when height.length == 0 or 1
-    let maxArea = 0
-    let left = 0
-    let right = height.length - 1
+  let left = 0
+  let right = height.length - 1
 
-    while ((right - left) > 0) {
-        const width = right - left
-        const area =  width * Math.min(height[left], height[right])
-        maxArea = Math.max(maxArea, area)
+  let maxArea = 0
 
-        if (height[left] === height[right]) {
-            if (height[left+1] <= height[right-1]) {
-                right--
-            } else {
-                left++
-            }
-        } else if (height[left] < height[right])
-            left++
-        else
-            right--
-    }
+  while (left < right) {
+      const h = Math.min(height[left], height[right])
+      maxArea = Math.max(h * (right - left), maxArea)
 
-    return maxArea
+      if (height[left] < height[right])
+          left++
+      else
+          right--
+  }
+
+  return maxArea
 }
 
 
 console.assert(maxArea([1,8,6,2,5,4,8,3,7]) === 49)
 console.assert(maxArea([1,1]) === 1)
 console.assert(maxArea([4,3,2,1,4]) === 16)
+console.assert(maxArea([1,2,4,3]) === 4)
 console.assert(maxArea([1,2,1]) === 2)
 console.assert(maxArea([3,2,1,1,2,3]) === 15)

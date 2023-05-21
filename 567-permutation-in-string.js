@@ -36,21 +36,16 @@ const checkInclusion = (s1, s2) => {
     for (let i = 0; i < s1.length; i++)
         s2WindowFreqs[s2[i]] = 1 + (s2WindowFreqs[s2[i]] ?? 0)
 
-    if (Object.entries(s1Freqs)
-              .map(([letter, freq]) => s2WindowFreqs[letter] === freq)
-              .reduce((acc, match) => acc && match, true))
-        return true
 
-
-    for (let i = 1; i < (s2.length - s1.length + 1); i++) {
-        s2WindowFreqs[s2[i - 1]]--
-        const windowEndLetter = s2[i + s1.length - 1]
-        s2WindowFreqs[windowEndLetter] = 1 + (s2WindowFreqs[windowEndLetter] ?? 0)
-
+    for (let i = 0; i <= (s2.length - s1.length); i++) {
         if (Object.entries(s1Freqs)
                   .map(([letter, freq]) => s2WindowFreqs[letter] === freq)
                   .reduce((acc, match) => acc && match, true))
             return true
+
+        s2WindowFreqs[s2[i]]--
+        const windowEndLetter = s2[i + s1.length]
+        s2WindowFreqs[windowEndLetter] = 1 + (s2WindowFreqs[windowEndLetter] ?? 0)
     }
 
     return false

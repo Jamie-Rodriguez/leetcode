@@ -68,16 +68,14 @@ const goodNodes = root => {
 
 
 const arrayToBinaryTree = (arr, i=0) => {
-    if (i < arr.length) {
-        const node = { val: arr[i], left: null, right: null }
+    if (i >= arr.length)
+        return null
 
-        node.left = arrayToBinaryTree(arr, 2 * i + 1)
-        node.right = arrayToBinaryTree(arr, 2 * i + 2)
-
-        return node
+    return {
+        val: arr[i],
+        left: arrayToBinaryTree(arr, 2 * i + 1),
+        right: arrayToBinaryTree(arr, 2 * i + 2)
     }
-
-    return null
 }
 
 console.assert(goodNodes(arrayToBinaryTree([3,1,4,3,null,1,5])) === 4)

@@ -31,26 +31,55 @@
 */
 
 
-const longestCommonSubsequence = (text1, text2) => {
-    const cache = [...Array(text1.length)].map(() => Array(text2.length).fill(undefined))
+const lcsTopDown = (text1, text2) => {
+    const hash = (a, b) => (a + b) * (a + b + 1) / 2 + b
+    const cache = new Map()
 
-    const lcs = (i=text1.length, j=text2.length) => {
-        if (i === 0 || j === 0)
+    const lcs = (i, j) => {
+        if (text1.length <= i || text2.length <= j)
             return 0
 
-        if (cache[i - 1][j - 1] !== undefined)
-            return cache[i - 1][j - 1]
+        if (cache.has(hash(i, j)))
+            return cache.get(hash(i, j))
 
-        if (text1[i - 1] === text2[j - 1])
-            cache[i - 1][j - 1] = 1 + lcs(i - 1, j - 1)
-        else
-            cache[i - 1][j - 1] = Math.max(lcs(i, j - 1), lcs(i - 1, j))
+        const lcsSize = text1[i] === text2[j] ? 1 + lcs(i + 1, j + 1)
+                                              : Math.max(lcs(i + 1, j),
+                                                         lcs(i, j + 1))
 
-        return cache[i - 1][j - 1]
+        cache.set(hash(i, j), lcsSize)
+
+        return lcsSize
     }
 
-    return lcs(text1.length, text2.length)
+    return lcs(0, 0)
 }
+
+const lcsBottomUp = (text1, text2) => {
+    const subproblems = Array(text1.length).fill(undefined)
+                                           .map(() => Array(text2.length).fill(undefined))
+
+    // Base cases
+    subproblems[text1.length - 1][text2.length - 1] = text1[text1.length - 1] === text2[text2.length - 1]
+
+
+    for (let i = text1.length - 1; 0 <= i; i--)
+        for (let j = subproblems[i].length - 1; 0 <= j; j--) {
+            // Don't overwrite base case
+            if ((i === text1.length - 1) && (j === text2.length - 1))
+                continue
+
+            subproblems[i][j] = text1[i] === text2[j]
+                                ? 1 + (i + 1 < text1.length && j + 1 < text2.length
+                                       ? subproblems[i + 1][j + 1] : 0)
+                                : Math.max(i + 1 < text1.length ? subproblems[i + 1][j] : 0,
+                                           j + 1 < text2.length ? subproblems[i][j + 1] : 0)
+        }
+
+    return subproblems[0][0]
+}
+
+
+const longestCommonSubsequence = (text1, text2) => lcsBottomUp(text1, text2)
 
 
 console.assert(longestCommonSubsequence('abcde', 'ace') === 3)

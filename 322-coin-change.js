@@ -46,6 +46,58 @@ const coinChange = (coins, amount) => {
     return cache[amount] !== Infinity ? cache[amount] : -1
 }
 
+const coinChangeTopDown = (coins, amount) => {
+    const cache = new Map()
+
+    const fewestCoins = amount => {
+        if (amount === 0)
+            return 0
+
+        if (amount < 0)
+            return -1
+
+        if (cache.has(amount))
+            return cache.get(amount)
+
+        let min = Infinity
+
+        for (const coin of coins) {
+            const numCoins = fewestCoins(amount - coin)
+
+            if (numCoins !== -1)
+                min = Math.min(min, 1 + numCoins)
+        }
+
+        cache.set(amount, min)
+
+        return (min !== Infinity) ? min : -1
+    }
+
+    return fewestCoins(amount)
+}
+
+const coinChangeBottomUp = (coins, amount) => {
+    const subproblems = Array(amount + 1).fill(undefined)
+
+    // Base cases
+    subproblems[0] = 0
+
+    for (let a = 1; a < subproblems.length; a++) {
+        let min = Infinity
+
+        for (const coin of coins) {
+            const numCoins = 0 <= (a - coin) ? 1 + subproblems[a - coin]
+                                             : Infinity
+
+            if (numCoins !== Infinity)
+                min = Math.min(min, numCoins)
+        }
+
+        subproblems[a] = min
+    }
+
+    return subproblems[amount] !== Infinity ? subproblems[amount] : -1
+}
 
 console.assert(coinChange([1,2,5], 11) === 3)
 console.assert(coinChange([2], 3) === -1)

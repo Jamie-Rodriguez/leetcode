@@ -54,7 +54,7 @@ const canJump = nums => {
 }
 
 
-const { performance } = require('perf_hooks');
+const { performance } = require('perf_hooks')
 
 // Note: MAX_TIME will depend on specific hardware being run
 // Tested on a M1 Macbook Pro Max

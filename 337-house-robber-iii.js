@@ -45,7 +45,7 @@ const rob = root => {
 
 
 const arrayToBinaryTree = (arr, i=0) => {
-    if (i >= arr.length)
+    if (i >= arr.length || arr[i] === null)
         return null
 
     return {

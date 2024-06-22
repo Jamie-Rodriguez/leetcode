@@ -38,10 +38,9 @@ const levelOrderDFS = root => {
 
         levels[level].push(val)
 
-        if (left)
-            recurse(left, level + 1)
-        if (right)
-            recurse(right, level + 1)
+        for (const child of [left, right])
+            if (child)
+                recurse(child, level + 1)
     }
 
     if (root)

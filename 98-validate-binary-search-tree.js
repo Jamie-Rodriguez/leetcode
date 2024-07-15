@@ -24,14 +24,16 @@
 */
 
 
-const isValidBST = (root, min=-Infinity, max=Infinity) => {
-    const { val, left, right } = root
+const isValidBST = (tree, min = -Infinity, max = Infinity) => {
+    if (!tree)
+        return true
 
-    const leftValid = left ? left.val < val : true
-    const rightValid = right ? val < right.val : true
-    const isValidSubtree = min < val && val < max
+    const { val, left, right } = tree
 
-    return leftValid && rightValid && isValidSubtree && (left ? isValidBST(left, min, val) : true) && (right ? isValidBST(right, val, max) : true)
+    if (!(min < val && val < max))
+        return false
+
+    return isValidBST(left, min, val) && isValidBST(right, val, max)
 }
 
 

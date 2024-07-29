@@ -32,6 +32,47 @@
 */
 
 
+// WARNING: Mutates 'grid'
+// Uses Breadth-First Search to count area of islands
+const bfs = (grid, start) => {
+    if (grid[start.row][start.column] === 0)
+        return 0
+
+    const visited = []
+    const queue = [start]
+    let area = 0
+
+    while (queue.length) {
+        const current = queue.pop()
+
+        if (visited.some(({ row, column }) => current.row === row && current.column === column))
+            continue
+
+        visited.push(current)
+
+        grid[current.row][current.column] = 0
+        area++
+
+        neighbours = [
+            { row: current.row - 1, column: current.column     },
+            { row: current.row,     column: current.column + 1 },
+            { row: current.row + 1, column: current.column     },
+            { row: current.row,     column: current.column - 1 }
+        ].filter(coord => !visited.some(
+            ({ row, column }) => coord.row === row && coord.column === column))
+        .filter(
+            ({ row, column }) => row >= 0 &&
+                                 column >= 0 &&
+                                 row < grid.length &&
+                                 column < grid[row].length)
+        .filter(({ row, column }) => grid[row][column] === 1)
+
+        queue.unshift(...neighbours)
+    }
+
+    return area
+}
+
 // Warning: Mutates 'grid'!
 const dfs = (grid, r, c, visited=[]) => {
     // Base-case conditions handled here:
@@ -62,8 +103,7 @@ const maxAreaOfIsland = grid => {
                 // So we don't consider them when counting islands
                 const area = dfs(grid, r, c)
 
-                if (area > maxArea)
-                    maxArea = area
+                maxArea = Math.max(area, maxArea)
             }
         }
 

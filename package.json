@@ -1,0 +1,17 @@
+{
+  "name": "leetcode",
+  "version": "1.0.0",
+  "description": "My solutions to [Leetcode](https://leetcode.com) questions and interesting questions encountered during real interviews, written in JavaScript.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha **/*.test.js"
+  },
+  "author": "Jamie Rodriguez",
+  "license": "Zlib",
+  "devDependencies": {
+    "chai": "^5.1.1",
+    "fast-check": "^3.19.0",
+    "mocha": "^10.6.0"
+  }
+}

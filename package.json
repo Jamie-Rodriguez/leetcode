@@ -10,8 +10,8 @@
   "author": "Jamie Rodriguez",
   "license": "Zlib",
   "devDependencies": {
-    "chai": "^5.1.1",
-    "fast-check": "^3.19.0",
-    "mocha": "^10.6.0"
+    "chai": "6.2.2",
+    "fast-check": "4.5.3",
+    "mocha": "11.7.5"
   }
 }
